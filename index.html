@@ -58,7 +58,34 @@
       // 🧠 Implement a `getAllReversed` method which returns the ints in reverse order
       // ❗ WARNING: except for `getAllReversed`, methods must respect the order of the integers
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
-
+      constructor(...args) {
+        this.ints = [...args];
+      }
+      getAll() {
+        return this.ints;
+      }
+      getEvens() {
+        return this.ints.filter(num => num % 2 === 0)
+      }
+      getNegatives() {
+        return this.ints.filter(num => num < 0)
+      }
+      getAllSquared() {
+        return this.ints.map(num => num ** 2);
+      }
+      pop() {
+        return this.ints.pop()
+      }
+      push(int) {
+        this.ints.push(int);
+        return this.ints;
+      }
+      getEveryNth(n) {
+        return this.ints.filter((_, index) => index % n === 0)
+      }
+      getAllReversed() {
+        return this.ints.slice().reverse()
+      }
     }
 
     // 👉 CHALLENGE 2 NerfGun
@@ -76,7 +103,34 @@
       //      * When engaging the safety, return "Safety enabled!"
       //      * When disengaging the safety, return "Safety disabled!"
       // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
-
+      constructor(totalProjectiles) {
+        this.capacity = totalProjectiles
+        this.currentAmmo = totalProjectiles
+        this.safetyOn = true
+      }
+      shoot() {
+        if(this.currentAmmo > 0 && !this.safetyOn) {
+          this.currentAmmo --;
+          return "Bang!"
+        } else {
+          return "Click!"
+        }
+      }
+      reload(num) {
+        if(typeof num !== 'number' || num <= 0) { // Passing an argument which is not a number larger than zero returns the string "Error reloading!"
+        return "Error reloading!"
+        }
+        this.currentAmmo = Math.min(this.capacity, this.currentAmmo + num);
+        return `${this.currentAmmo} projectiles left!`
+      }
+      toggleSafety() {
+        this.safetyOn = !this.safetyOn
+        if(this.safetyOn) {
+          return "Safety enabled!"
+        } else {
+          return "Safety disabled!"
+        }
+      }
     }
 
     // 👉 CHALLENGE 3 EBook
